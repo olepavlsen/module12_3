@@ -11,9 +11,10 @@ class TournamentTest(unittest.TestCase):
         self.andr = runner_and_tournament.Runner('Андрей', 9)
         self.nick = runner_and_tournament.Runner('Ник', 3)
 
-    @classmethod
-    def setUpClass(cls):
-        cls.all_results = {}
+    if not is_frozen:
+        @classmethod
+        def setUpClass(cls):
+            cls.all_results = {}
 
     @unittest.skipUnless(is_frozen == False, 'Тесты в этом кейсе заморожены')
     def test_run_1(self):
@@ -45,10 +46,10 @@ class TournamentTest(unittest.TestCase):
             self.res[place] = runner.name
         self.all_results[3] = self.res
 
-    @unittest.skipUnless(is_frozen == False, '')
-    @classmethod
-    def tearDownClass(cls):
-        print(f'{cls.all_results[1]} \n{cls.all_results[2]} \n{cls.all_results[3]}')
+    if not is_frozen:
+        @classmethod
+        def tearDownClass(cls):
+            print(f'{cls.all_results[1]} \n{cls.all_results[2]} \n{cls.all_results[3]}')
 
 
 if __name__ == "__main__":
